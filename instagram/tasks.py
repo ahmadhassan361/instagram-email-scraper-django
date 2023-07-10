@@ -132,7 +132,7 @@ from .models import ProcessController
 
 BASE_URL = "https://instagram-scraper-2022.p.rapidapi.com/ig"
 headers = {
-    "X-RapidAPI-Key": "eae1b73cb9mshc5dece8c05b7c84p172949jsned39caa145b8",
+    "X-RapidAPI-Key": "",
     "X-RapidAPI-Host": "instagram-scraper-2022.p.rapidapi.com"
 }
 
