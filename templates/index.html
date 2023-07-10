@@ -1,0 +1,106 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <title>Email Scraper</title>
+  <!-- Required meta tags -->
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    {% if process.isRuning %}
+    <meta http-equiv='refresh' content='5' url='/'>
+    {% endif %}
+
+</head>
+
+<body>
+  <header class="p-3 text-center fs-1 bg-primary  fw-bold text-white">
+    <!-- place navbar here -->
+    Instagram Email Scraper
+  </header>
+  <main class="container">
+    <div class="row justify-space-evenly mt-5">
+
+    
+    <div class="col-md-4">
+        <div class="shadow bg-white p-3 rounded rounded-2">
+           
+                {% if process.isRuning %}
+                <div>
+                  <h4>Process Status</h4>
+                  <h3 class="text-success text-center p-5 rounded rounded-2" style="background-color: #98DCB3;">Running</h3>
+                  <h1>{{process.username}}</h1>
+                  {% if process.scraped_email > 0 %} <h5 class="m-0">scraped emails: <b class="text-success">{{process.scraped_email}}</b> </h5> {% endif %}
+                  <h5>total accounts check: {{process.total_acc}}</h5>
+                  <h6>start at: {{process.created_date}}</h6>
+                  {% if process.total_acc > 0 %}
+                  <a href=" {% url 'stop' stop_id=process.id %}" class='btn btn-danger mt-3'>Stop Process</a>
+                  {% endif %}
+              </div>
+                {% else  %}
+                <div>
+                  <h4>Start Email Scraping</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="my-3">
+                      <label for="username" class="form-label">Enter Instagram Username/PageName</label>
+                      <input type="text" class="form-control" name="username" id="username" placeholder="ronaldo" required>
+                    </div>
+                   
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+                {% endif %}
+              
+        </div>
+
+
+    </div>
+    <div class="col-md-7">
+        <div class="shadow rounded rounded-2 p-2">
+            <h4>All Scraped Email Lists</h4>
+            <div class="p-2">
+              {% for pro in processes %}
+              
+              
+                <div class="bg-light w-100 p-3 rounded rounded-2 d-flex align-items-center mb-3">
+                  <img src="{% static 'csv.png' %}" class="img-fluid p-0" width="100" alt="" srcset="">
+                  <div class="w-100">
+                    <h5 class="m-0 p-0">{{pro.file}}</h5>
+                    {% if pro.scraped_email > 0 %} <h6 class="m-0">scraped emails: <b class="text-success">{{pro.scraped_email}}</b> </h6> {% endif %}
+                    <h6 class="m-0">status: {% if pro.isRuning %} <b class="text-warning">Running</b> {% elif pro.isComplete %} <b class="text-success">Completed</b> {% endif %}</h6>
+                    <h6 class="m-0">created at {{pro.created_date}}</h6>
+                  </div>
+                  {% if pro.scraped_email > 0 %}
+                  <a href="/media/{{pro.file}}" class="btn btn-success">download</a>
+                  {% else %}
+                  <button class="btn btn-success " disabled>donwload</button>
+                  {% endif %}
+                  
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div> 
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
