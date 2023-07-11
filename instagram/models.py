@@ -10,4 +10,5 @@ class ProcessController(models.Model):
     isStop = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     complete_date = models.DateTimeField(null=True,blank=True)
+    list_data = models.JSONField(default=list)
     total_acc = models.IntegerField(default=0)
