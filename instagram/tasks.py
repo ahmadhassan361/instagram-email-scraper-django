@@ -114,7 +114,7 @@ def getFollowers(file_path, obj, userId, next_cursor=None):
                     obj_controller.scraped_email = obj_controller.scraped_email + 1
                     obj_controller.save()
             obj_controller = ProcessController.objects.get(pk=obj)
-            if obj_controller.isStop:
+            if not obj_controller.isStop:
                 print("------------------")    
                 print("fetched and again call")
                 getFollowers(
