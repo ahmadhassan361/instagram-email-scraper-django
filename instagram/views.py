@@ -4,7 +4,7 @@ import time
 from django.contrib.auth import authenticate, login
 from .tasks import run_background_task
 from django.contrib.auth.decorators import login_required
-
+from background_task.models import Task
 
 # Create your views here.
 def login_view(request):
@@ -53,11 +53,23 @@ def index(request):
 def stop(request, stop_id):
     try:
         if stop_id is not None:
+            # Task.objects.all().delete()
+            
             pr = ProcessController.objects.get(id=stop_id)
             pr.isStop = True
             pr.isRuning = False
             pr.isComplete = True
             pr.save()
+            print(pr.isStop)
+        return redirect("index")
+    except Exception as e:
+        return redirect("index")
+    
+@login_required(login_url="login")
+def delete(request):
+    try:
+        ProcessController.objects.all().delete()
+        Task.objects.all().delete()
         return redirect("index")
     except Exception as e:
         return redirect("index")

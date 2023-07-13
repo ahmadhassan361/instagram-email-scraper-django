@@ -26,7 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view=index,name='index'),
     path('login', view=login_view,name='login'),
-    path('stop/<int:stop_id>', view=stop,name='stop'),
+    path('stop/<int:stop_id>', view=stop,name='stop'), 
+    path('delete/', view=delete,name='delete'), 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 
