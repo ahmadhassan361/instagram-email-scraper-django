@@ -12,3 +12,5 @@ class ProcessController(models.Model):
     complete_date = models.DateTimeField(null=True,blank=True)
     list_data = models.JSONField(default=list)
     total_acc = models.IntegerField(default=0)
+    total_count = models.IntegerField(default=0)
+    
