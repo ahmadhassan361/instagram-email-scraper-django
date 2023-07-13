@@ -36,6 +36,7 @@
                   <h3 class="text-success text-center p-5 rounded rounded-2" style="background-color: #98DCB3;">Running</h3>
                   <h1>{{process.username}}</h1>
                   {% if process.scraped_email > 0 %} <h5 class="m-0">scraped emails: <b class="text-success">{{process.scraped_email}}</b> </h5> {% endif %}
+                  <h5>total accounts: {{process.total_count}}</h5>
                   <h5>total accounts check: {{process.total_acc}}</h5>
                   <h6>start at: {{process.created_date}}</h6>
                   {% if process.total_acc > 0 %}
