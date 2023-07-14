@@ -77,8 +77,8 @@
                   <img src="{% static 'csv.png' %}" class="img-fluid p-0" width="100" alt="" srcset="">
                   <div class="w-100">
                     <h5 class="m-0 p-0">{{pro.file}}</h5>
-                    <h6 class="m-0 p-0">total followers: {{process.total_count}}</h6>
-                    <h6 class="m-0 p-0">total public accounts checked: {{process.total_acc}}</h6>
+                    <h6 class="m-0 p-0">total followers: {{pro.total_count}}</h6>
+                    <h6 class="m-0 p-0">total public accounts checked: {{pro.total_acc}}</h6>
                     {% if pro.scraped_email > 0 %} <h6 class="m-0">scraped emails: <b class="text-success">{{pro.scraped_email}}</b> </h6> {% endif %}
                     <h6 class="m-0">status: {% if pro.isRuning %} <b class="text-warning">Running</b> {% elif pro.isComplete %} <b class="text-success">Completed</b> {% endif %}</h6>
                     <h6 class="m-0">created at {{pro.created_date}}</h6>
