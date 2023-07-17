@@ -87,32 +87,35 @@ def getFollowers(file_path, obj, userId, next_cursor=None):
             # obj_controller.save()
             time.sleep(2)
             for i in public_users:
-                time.sleep(1)
-                obj_controller = ProcessController.objects.get(pk=obj)
-                if obj_controller.isStop:
-                    print("---------break--------")
-                    break
-                usr = getUser(i["node"]["username"])
-                print("run")
-                obj_controller.total_acc = obj_controller.total_acc + 1
-                obj_controller.save()
-                if (
-                    usr.get("public_email", None) is not None
-                    and usr.get("public_email", None) != ""
-                ):
-                    temp = [
-                        usr.get("username", ""),
-                        usr.get("full_name", ""),
-                        usr.get("follower_count", ""),
-                        usr.get("public_email", ""),
-                        usr.get("public_phone_country_code", ""),
-                        usr.get("public_phone_number", ""),
-                        usr.get("whatsapp_number", ""),
-                    ]
-                    append_row_to_csv(file_path=file_path, row_data=temp)
+                try:
+                    time.sleep(1)
                     obj_controller = ProcessController.objects.get(pk=obj)
-                    obj_controller.scraped_email = obj_controller.scraped_email + 1
+                    if obj_controller.isStop:
+                        print("---------break--------")
+                        break
+                    usr = getUser(i["node"]["username"])
+                    print("run")
+                    obj_controller.total_acc = obj_controller.total_acc + 1
                     obj_controller.save()
+                    if (
+                        usr.get("public_email", None) is not None
+                        and usr.get("public_email", None) != ""
+                    ):
+                        temp = [
+                            usr.get("username", ""),
+                            usr.get("full_name", ""),
+                            usr.get("follower_count", ""),
+                            usr.get("public_email", ""),
+                            usr.get("public_phone_country_code", ""),
+                            usr.get("public_phone_number", ""),
+                            usr.get("whatsapp_number", ""),
+                        ]
+                        append_row_to_csv(file_path=file_path, row_data=temp)
+                        obj_controller = ProcessController.objects.get(pk=obj)
+                        obj_controller.scraped_email = obj_controller.scraped_email + 1
+                        obj_controller.save()
+                except:
+                    pass
             obj_controller = ProcessController.objects.get(pk=obj)
             if not obj_controller.isStop:
                 print("------------------")    
@@ -128,33 +131,35 @@ def getFollowers(file_path, obj, userId, next_cursor=None):
             print(len(public_users), " saved")
             
             for i in public_users:
-                time.sleep(1)
-                obj_controller = ProcessController.objects.get(pk=obj)
-                if obj_controller.isStop:
-                    print("---------break--------")
-                    break
-                usr = getUser(i["node"]["username"])
-                print("run")
-                obj_controller.total_acc = obj_controller.total_acc + 1
-                obj_controller.save()
-                if (
-                    usr.get("public_email", None) is not None
-                    and usr.get("public_email", None) != ""
-                ):
-                    temp = [
-                        usr.get("username", ""),
-                        usr.get("full_name", ""),
-                        usr.get("follower_count", ""),
-                        usr.get("public_email", ""),
-                        usr.get("public_phone_country_code", ""),
-                        usr.get("public_phone_number", ""),
-                        usr.get("whatsapp_number", ""),
-                    ]
-                    append_row_to_csv(file_path=file_path, row_data=temp)
+                try:
+                    time.sleep(1)
                     obj_controller = ProcessController.objects.get(pk=obj)
-                    obj_controller.scraped_email = obj_controller.scraped_email + 1
+                    if obj_controller.isStop:
+                        print("---------break--------")
+                        break
+                    usr = getUser(i["node"]["username"])
+                    print("run")
+                    obj_controller.total_acc = obj_controller.total_acc + 1
                     obj_controller.save()
-            
+                    if (
+                        usr.get("public_email", None) is not None
+                        and usr.get("public_email", None) != ""
+                    ):
+                        temp = [
+                            usr.get("username", ""),
+                            usr.get("full_name", ""),
+                            usr.get("follower_count", ""),
+                            usr.get("public_email", ""),
+                            usr.get("public_phone_country_code", ""),
+                            usr.get("public_phone_number", ""),
+                            usr.get("whatsapp_number", ""),
+                        ]
+                        append_row_to_csv(file_path=file_path, row_data=temp)
+                        obj_controller = ProcessController.objects.get(pk=obj)
+                        obj_controller.scraped_email = obj_controller.scraped_email + 1
+                        obj_controller.save()
+                except:
+                    pass
             print("finished")
         else:
             print(res)
